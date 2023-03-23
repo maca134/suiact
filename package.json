@@ -1,0 +1,44 @@
+{
+	"name": "@maca134/suiact",
+	"version": "1.0.0",
+	"description": "A react like library for working with Adobe ScriptUI.",
+	"main": "index.js",
+	"scripts": {
+		"build": "npm run clean && tsc",
+		"clean": "rimraf ./dist",
+		"publish": "npm run build && git add ./* && npm version patch",
+		"postversion": "node ./scripts/post-build.js && git push && git push --tags && cd dist && npm publish",
+		"lint": "eslint --ext \".js,.jsx,.ts,.tsx\" \"./src\"",
+		"lint:fix": "eslint --fix --ext \".js,.jsx,.ts,.tsx\" \"./src\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/maca134/suiact.git"
+	},
+	"keywords": [
+		"jsx",
+		"react",
+		"reactive",
+		"ui",
+		"adobe",
+		"scriptui",
+		"extendscript"
+	],
+	"author": "maca134@googlemail.com",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/maca134/suiact/issues"
+	},
+	"homepage": "https://github.com/maca134/suiact#readme",
+	"dependencies": {
+		"types-for-adobe": "^7.0.12"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.56.0",
+		"@typescript-eslint/parser": "^5.56.0",
+		"eslint": "^8.36.0",
+		"fs-jetpack": "^5.1.0",
+		"rimraf": "^4.4.0",
+		"typescript": "^5.0.2"
+	}
+}

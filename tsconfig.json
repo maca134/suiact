@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"baseUrl": "./",
+		"outDir": "./dist",
+		"target": "ES3",
+		"noLib": true,
+		"declaration": true,
+		"ignoreDeprecations": "5.0",
+		"types": [
+			"types-for-adobe/shared/global",
+			"types-for-adobe/shared/scriptui",
+		],
+		"typeRoots": [
+			"./typings"
+		]
+	},
+	"include": [
+		"./src/**/*",
+		"./typings/**/*",
+	],
+}
