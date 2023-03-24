@@ -12,6 +12,8 @@ export type Events = {
 	remove: Suiact.Fiber,
 }
 
+export const Fragment = 'fragment';
+
 export const events = new EventEmitter<Events>();
 
 let currentRoot: Suiact.Fiber;
@@ -114,7 +116,7 @@ function removeHostElement(fiber: Suiact.Fiber, isChild = false) {
 
 	if (
 		fiber.type !== 'root'
-		&& fiber.type !== 'fragment'
+		&& fiber.type !== Fragment
 		&& typeof fiber.type !== 'function'
 		&& fiber.element
 	) {
@@ -161,7 +163,7 @@ export function update(fiber?: Suiact.Fiber): void {
 		commit(fiber);
 		return;
 	}
-	if (fiber.type === 'fragment' || typeof fiber.type === 'function') {
+	if (fiber.type === Fragment || typeof fiber.type === 'function') {
 		let parent = fiber.parent
 		while (!parent.element && parent.parent)
 			parent = parent.parent
@@ -189,5 +191,3 @@ export function update(fiber?: Suiact.Fiber): void {
 		nextFiber = nextFiber.parent
 	}
 }
-
-export const Fragment = 'fragment';
