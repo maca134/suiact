@@ -1,4 +1,5 @@
 import { EventEmitter } from "./events";
+import { assign, isArray } from "./utils";
 
 export type Renderer<T = any> = {
 	create(fiber: Suiact.Fiber): T;
@@ -20,7 +21,7 @@ let currentRoot: Suiact.Fiber;
 let currentRenderer: Renderer;
 
 function reconcile(fiber: Suiact.Fiber, elements: JSX.Element | JSX.Element[] = []) {
-	if (!Array.isArray(elements)) {
+	if (!isArray(elements)) {
 		elements = [elements];
 	}
 
@@ -127,7 +128,7 @@ function removeHostElement(fiber: Suiact.Fiber, isChild = false) {
 
 export function createElement<P extends Suiact.Props>(type: Suiact.Component, props?: P | null, ...children: Suiact.Element[]): Suiact.Element {
 	const defaultProps = typeof type === 'function' ? type.defaultProps : {};
-	const normalizedProps: Suiact.Props = Object.assign({}, defaultProps, props, { ref: undefined, ctx: undefined });
+	const normalizedProps: Suiact.Props = assign({}, defaultProps, props, { ref: undefined, ctx: undefined });
 	if (children) {
 		normalizedProps.children = children;
 	}

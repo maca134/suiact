@@ -1,4 +1,5 @@
 import { events } from "./suiact";
+import { indexOf } from "./utils";
 
 let shouldUpdateLayout = true;
 
@@ -119,7 +120,7 @@ function create(fiber: Suiact.Fiber<_Control>) {
 	}
 
 	for (const key in props) {
-		if (ignoreFields.indexOf(key) !== -1) {
+		if (indexOf(ignoreFields, key) !== -1) {
 			continue;
 		}
 		if (key.indexOf('on') === 0 && typeof props[key] === 'function') {
