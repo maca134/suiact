@@ -1,5 +1,4 @@
 import './types';
-import './polyfill';
 import renderer from './renderer';
 import { events, init, update, createElement, Fragment } from './suiact';
 
