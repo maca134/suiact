@@ -1,6 +1,6 @@
 {
 	"name": "@maca134/suiact",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "A react like library for working with Adobe ScriptUI.",
 	"main": "index.js",
 	"scripts": {
