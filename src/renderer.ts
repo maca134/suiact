@@ -172,7 +172,11 @@ function update(fiber: Suiact.Fiber) {
 }
 
 function remove(fiber: Suiact.Fiber) {
-	fiber.element.parent.remove(fiber.element);
+	if (fiber.element instanceof Window) {
+		fiber.element.close();
+	} else {
+		fiber.element.parent.remove(fiber.element);
+	}
 }
 
 export default {
