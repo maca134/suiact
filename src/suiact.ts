@@ -11,6 +11,7 @@ export type Events = {
 	update: Suiact.Fiber,
 	commit: Suiact.Fiber,
 	remove: Suiact.Fiber,
+	finish: Suiact.Fiber,
 }
 
 export const Fragment = 'fragment';
@@ -86,6 +87,7 @@ function commit(fiber: Suiact.Fiber) {
 	if (!fiber.parent) {
 		commit(fiber.child)
 		currentRoot = fiber;
+		events.emit('finish', fiber);
 		return
 	}
 

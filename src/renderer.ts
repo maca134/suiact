@@ -2,6 +2,7 @@ import { events } from "./suiact";
 import { indexOf } from "./utils";
 
 let shouldUpdateLayout = true;
+let windows: Window[] = [];
 
 events.on('commit', (fiber: Suiact.Fiber) => {
 	if (fiber.element && fiber.effectTag === 'PLACEMENT') {
@@ -10,7 +11,8 @@ events.on('commit', (fiber: Suiact.Fiber) => {
 	if (shouldUpdateLayout && fiber.element && (fiber.element instanceof Window || fiber.element instanceof Panel)) {
 		shouldUpdateLayout = false;
 		if (fiber.effectTag === 'PLACEMENT' && fiber.element instanceof Window) {
-			fiber.element.show();
+			//fiber.element.show();
+			windows.push(fiber.element);
 		} else {
 			fiber.element.layout.layout(true);
 			fiber.element.layout.resize();
@@ -19,6 +21,13 @@ events.on('commit', (fiber: Suiact.Fiber) => {
 });
 
 events.on('remove', () => shouldUpdateLayout = true);
+
+events.on('finish', () => {
+	for (const window of windows) {
+		window.show();
+	}
+	windows = [];
+});
 
 function create(fiber: Suiact.Fiber<_Control>) {
 	if (fiber.type === 'root' || fiber.type === 'fragment') {
