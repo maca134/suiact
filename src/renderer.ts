@@ -145,7 +145,7 @@ function update(fiber: Suiact.Fiber) {
 		!fiber.element
 		|| fiber.type === 'root'
 		|| fiber.type === 'fragment'
-		|| fiber.type === 'window' && fiber.element instanceof Panel // we dont want to be change the parent panel proterties
+		|| (fiber.type === 'window' && fiber.element instanceof Panel) // we dont want to be change the parent panel
 	) {
 		return;
 	}
