@@ -11,7 +11,6 @@ events.on('commit', (fiber: Suiact.Fiber) => {
 	if (shouldUpdateLayout && fiber.element && (fiber.element instanceof Window || fiber.element instanceof Panel)) {
 		shouldUpdateLayout = false;
 		if (fiber.effectTag === 'PLACEMENT' && fiber.element instanceof Window) {
-			//fiber.element.show();
 			windows.push(fiber.element);
 		} else {
 			fiber.element.layout.layout(true);
@@ -24,7 +23,8 @@ events.on('remove', () => shouldUpdateLayout = true);
 
 events.on('finish', () => {
 	for (const window of windows) {
-		window.show();
+		if (!window.visible)
+			window.show(); // when window is a dialog the initial script execution is blocked here so we need to check if the window is visible
 	}
 	windows = [];
 });
